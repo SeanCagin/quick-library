@@ -1,0 +1,45 @@
+* {
+  border: 0;
+  margin: 0;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+body {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 100px;
+  padding: 50px;
+}
+
+.book {
+  width: 250px;
+  background-color: aqua;
+  border: 2px solid black;
+}
+
+.title, .author, .page-count, .read {
+  min-height: 150px;
+  text-align: center;
+  border-bottom: 1px dotted gray;
+}
+.title {
+  font-weight: bold;
+  font-size: 2rem;
+}
+.author, .page-count, .read  {
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.read-button {
+  background-color: yellow;
+  height: 20px;
+  min-width: 60px;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  user-select: none;
+}
+.read-button:hover {
+  cursor: pointer;
+}
