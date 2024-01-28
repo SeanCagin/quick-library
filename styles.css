@@ -9,16 +9,56 @@ body {
   flex-wrap: wrap;
   gap: 100px;
   padding: 50px;
+  background-color: #fde68a;
+}
+
+dialog {
+  width: fit-content;
+}
+.form-row {
+  display: flex;
+  column-gap: 50px;
+}
+form label {
+  width: 120px;
+  text-align: right;
+}
+form button {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  background-color: #fde68a;
+  padding: 10px;
+  border-radius: 5px;
+}
+form button:hover {
+  cursor: pointer;
+}
+form input[type="text"],
+form input[type="number"] {
+  border: 2px solid #fde68a;
+}
+
+.add-book {
+  font-weight: bold;
+  font-size: 1.2rem;
+  position: fixed;
+  background-color: #84cc16;
+  top: 0;
+  left: 0;
+}
+.add-book:hover {
+  cursor: pointer;
 }
 
 .book {
   width: 250px;
-  background-color: aqua;
+  background-color: #92400e;
   border: 2px solid black;
 }
 
-.title, .author, .page-count, .read {
-  min-height: 150px;
+.title, .author, .page-count, .read, .book-button {
+  min-height: 50px;
   text-align: center;
   border-bottom: 1px dotted gray;
 }
@@ -30,16 +70,28 @@ body {
   font-weight: bold;
   font-size: 1rem;
 }
+.title::before {
+  content: "Title: ";
+}
+.author::before {
+  content: "Author: ";
+}
+.page-count::before {
+  content: "Page Count: ";
+}
+.read::before {
+  content: "Read?: ";
+}
 
-.read-button {
-  background-color: yellow;
-  height: 20px;
-  min-width: 60px;
-  text-align: center;
-  margin-left: auto;
-  margin-right: auto;
+
+.book-button {
+  background-color: #4ade80;
   user-select: none;
 }
-.read-button:hover {
+.book-button:hover {
   cursor: pointer;
+}
+
+#delete {
+  background-color: #9333ea;
 }

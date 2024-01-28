@@ -16,15 +16,23 @@ function Book(title, author, pageCount, read) {
             wrapper.appendChild(el);
         }
         let readButton = document.createElement("div");
-        readButton.classList.add("read-button");
+        readButton.classList.add("book-button");
         readButton.textContent = "Toggle Read";
         readButton.addEventListener( "click", (e) => {
             this.read = !this.read;
             wrapper.querySelector(".read").textContent = this.read;
         })
+        let delBook = document.createElement("div");
+        delBook.classList.add("book-button");
+        delBook.id = "delete";
+        delBook.textContent = "Remove Book";
+        delBook.addEventListener("click", (e) => {
+            wrapper.parentNode.removeChild(wrapper);
+        });
         wrapper.appendChild(readButton); 
+        wrapper.appendChild(delBook);
 
-        return wrapper;
+        bookHolder.appendChild(wrapper);
     }
     
     this.title = title;
@@ -32,7 +40,7 @@ function Book(title, author, pageCount, read) {
     this.pageCount = pageCount;
     this.read = read;
     let boundLinkBook = linkBook.bind(this);
-    this.htmlEl = boundLinkBook(...arguments);
+    boundLinkBook(...arguments);
 }
 
 Book.prototype.info = function() {
@@ -40,13 +48,31 @@ Book.prototype.info = function() {
 } 
 
 const bookHolder = document.querySelector("body");
+const addBookButton = document.querySelector(".add-book");
+const bookFormHolder = document.querySelector(".book-form-holder");
+const bookForm = document.querySelector(".book-form");
+const submitButton = document.querySelector(".form-submit");
+const closeButton = document.querySelector(".close-form");
 const myLibrary = [];
 
-for (let i = 0; i < 2; i++) {
-    let newBook = new Book(i, i, i, true);
-    bookHolder.appendChild(newBook.htmlEl);
-    myLibrary.push(newBook);
-}
+addBookButton.addEventListener("click", () => {
+    bookFormHolder.showModal();
+});
+closeButton.addEventListener("click", () => {
+    bookFormHolder.close();
+    bookForm.reset();
+});
+submitButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    if (bookForm.checkValidity()) {
+        let data = new FormData(bookForm);
+        addBook(myLibrary, new Book(data.get("title"), data.get("author"), data.get("page-count"), data.get("read") === null ? false : true));
+        bookForm.reset();
+        bookFormHolder.close();
+    } else {
+        bookForm.reportValidity();
+    }
+});
 
 function addBook(library, book) {
     library.push(book);
