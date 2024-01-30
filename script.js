@@ -1,15 +1,20 @@
 "use strict";
 
-function toggleRead() {
+class Book {
+    
+    constructor(title, author, pageCount, read) {
+        this.title = title;
+        this.author = author;
+        this.pageCount = pageCount;
+        this.read = read;
+        this.linkBook(this.title, this.author, this.pageCount, this.read);
+    }
 
-}
-
-function Book(title, author, pageCount, read) {
-    function linkBook(title, author, pageCount, read) {
+    linkBook(title, author, pageCount, read) {
         let classes = ["title", "author", "page-count", "read"];
         let wrapper = document.createElement("div");
         wrapper.classList.toggle("book");
-        for (let i = 0; i < arguments.length; i++) {
+        for (let i = 0; i < classes.length; i++) {
             let el = document.createElement("div");
             el.classList.toggle(classes[i]);
             el.textContent = arguments[i];
@@ -34,18 +39,13 @@ function Book(title, author, pageCount, read) {
 
         bookHolder.appendChild(wrapper);
     }
-    
-    this.title = title;
-    this.author = author;
-    this.pageCount = pageCount;
-    this.read = read;
-    let boundLinkBook = linkBook.bind(this);
-    boundLinkBook(...arguments);
+
+    info() {
+        return `${this.title} by ${this.author}, ${this.pageCount} pages, ${read}`;
+    }
 }
 
-Book.prototype.info = function() {
-    return `${this.title} by ${this.author}, ${this.pageCount} pages, ${read}`;
-} 
+
 
 const bookHolder = document.querySelector("body");
 const addBookButton = document.querySelector(".add-book");
